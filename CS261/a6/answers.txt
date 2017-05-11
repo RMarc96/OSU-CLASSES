@@ -1,0 +1,89 @@
+1 -	cat & tac. Hash to the same bucket through stringHash1 but not stringHash2.
+
+2 - 	stringHash1 hashes a string by taking the string and parsing every single character. Each character
+in the string is converted to its ASCII decimal counterpart. The function then takes those decimals
+and then adds them all together then returns their total sum. However, this is faulty; stringHash1
+could return a key's value which is equal to another key's value. This occurs when these keys have
+the same letters and the same amount of letters but they are arranged in a different way. stringHash2
+is superior in that it adds another dynamic of arrangement into the hashing algorithm by multiplying a
+given character's decimal value with the position it's in. This guarantees that words with the same
+letters but different permutation gets different hash values.
+
+3 -	Both stringHash function do not change the amount of links that will be inserted in to the hashmap,
+they only change the places in which these links are inserted. In other words, our size() will be the same 
+regardless of which we use to hash.
+
+4 -	Yes, it is possible. Our hash functions will hash keys to different locations in the hashmap. Some keys
+which hash to the same bucket for stringHash1 can hash to different buckets with stringHash2, and the same is true
+vice-versa. This means we could get differing bucket amounts with both hash functions, which in turn would give us
+different bucket-to-link count ratios.
+
+5 -	Yes, it is possible. The hashing functions will hash keys to varying buckets. Some buckets will be filled
+with one hash function whereas some buckets won't be filled with the other hash function. This would mean varying
+amounts of empty buckets and filled buckets.
+
+6 -	There should be no difference. Even if a key were to hash to the buckets 998, 999, or 1000 but they didn't
+exist, out program would simply just double our table size to 1994 buckets. The amount of buckets we have doesn't
+change where a key needs to be hashed to.
+
+7 -	Below is a record of the concordance times and loads of our program for several initial table size capacities.
+	(The resize capability of our program was removed for this test). A graph of the results is provided in the pdf included.
+
+	Table Intial Capacity = 10
+	Concordance time = 121.68 seconds
+	Table count = 31619
+	Load = 3161.0000
+	...............................
+	Table Initial Capacity = 20
+	Concordance time = 61.11 seconds
+	Table count = 31619
+	Load = 1580.0000
+	...............................
+	Table Initial Capacity = 30
+	Concordance time = 39.66 seconds
+	Table count = 31619
+	Load = 1053.0000
+	...............................
+	Table Initial Capacity = 40
+	Concordance time = 30.35 seconds
+	Table count = 31619
+	Load = 790.0000
+	...............................
+	Table Initial Capacity = 50
+	Concordance time = 23.90 seconds
+	Table count = 31619
+	Load = 632.0000
+	...............................
+	Table Initial Capacity = 100
+	Concordance time = 11.06 seconds
+	Table count = 31619
+	Load = 316.0000
+	...............................
+	Table Initial Capacity = 250
+	Concordance time = 3.75 seconds
+	Table count = 31619
+	Load = 126.0000
+	...............................
+	Table Initial Capacity = 500
+	Concordance time = 2.07 seconds
+	Table count = 31619
+	Load = 63.0000
+	...............................
+	Table Initial Capacity = 1000
+	Concordance time = 1.42 seconds
+	Table count = 31619
+	Load = 31.0000
+	...............................
+	Table Initial Capacity = 10000
+	Concordance time = .81 seconds
+	Table count = 31619
+	Load = 3.0000
+	...............................
+
+
+	If you look at the graph, you will see that the line forms a sort of exponential decay function.
+	Starting from 10, we see that it takes a long time (about 2 minutes) for the program to process the
+	file. However, if we double the initial size to 20, we see that the time is halved (about 1 minute).
+	It gets halved again for an initial of 40 buckets. We see that the amount of time is significantly shorter
+	if greater values of initial bucket sizes. However, the amount of time spent decreases slower for greater values
+	of initial bucket sizes. 
