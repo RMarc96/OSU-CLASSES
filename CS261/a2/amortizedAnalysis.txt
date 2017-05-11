@@ -1,0 +1,27 @@
+
+
+1.
+     For the first 8 allocations, 1 unit of cost would be counted (N = 8). Once capacity is reached 
+(during the 9th allocation), 1 unit plus X number of cost is counted, where X is the number of items currently assigned, 
+therefore, 1 + 8 unit costs will be added on (N = 8 + 9 = 17). After that allocation, 7 more values are allocated,
+leaving a running total N = 17 + 7 = 24 units of cost.
+     For 32 consecutive pushes, the dynamic array will need to be rescaled twice (assuming capacity is doubled for every
+reallocation). Knowing this, we see that 32 consecutive pushes will require N = 8+(8+1)+7+(16+1)+15 = 56 unit cost.
+     The worst case time complexity of this algorithm is O(n), due to the resizing. However, since, on average, we are only adding
+on to the array, the time complexity of this algorithm on average is O(1).
+
+2.
+     For the first 8 allocations, 8 unit costs are counted. However, for every two allocations there onward, we would need to reallocate N number
+of items as well as add on the next item. At 16 pushes (note: every item in parenthesis is N items currently in the array), it would cost 
+8 + 2 + (8) + 2 + (10) + 2 + (12) + 2 + (14) = 64 units. For 32 pushes, it would cost 8 + 2 + (8) + 2 + (10) + 2 + (12) + 2 + (14) + 2 +
+(16) + 2 + (18) + 2 + (20) + 2 + (22) + 2 + (24) + 2 + (26) + 2 + (28) + 2 + (30) = 240 units. Roughly on average, we are both adding to our cost
+by n number of elements already in the array before the allocation and by 1 unit after wards. Thus, our average time complexity of this algorithm
+is O(n + 1), or simply, O(n).
+
+3.
+     Assume our current dyanmic array has a capacity of N capacity and there are currently N items allocated in it. Our current algorithm can have a
+worst-case time complexity of O(n^2) if we push the array, then immediately afterward, pop the array. This makes it so that when capacity is reached,
+N number of items is reallocated, then the following call of the pop function would cause another reallocation of N number of items. If we repeat push,
+pop, push, pop, ..., we would, on average, have O(n^2) time complexity.
+     Instead of halving the dynamic array every time the number elements is less than or equal to half the amount of the current capacity, I would just
+remove this behavior of the pop function all together. This would remove the strain of having extra reallocations of N elements.
