@@ -1,0 +1,81 @@
+#CS160 - Assignment 5 "My Name" by Ronald Salinas
+import turtle
+window = turtle.Screen()
+window.title("Click on turtle to write my name.")
+window.bgcolor('light blue')
+turtle = turtle.Turtle()
+def name(x,y):
+	turtle.reset()		#Refresh blank page
+	turtle.penup()	
+	turtle.goto(-130,0)	#Start position
+	turtle.pendown()	#Upper-case R
+	turtle.lt(90)
+	turtle.fd(50)
+	turtle.rt(90)
+	turtle.fd(20)
+	turtle.circle(-10,180)
+	turtle.fd(20)
+	turtle.rt(180)
+	turtle.fd(10)
+	turtle.rt(60)
+	turtle.fd(36.05551275)
+	turtle.lt(60)
+	turtle.penup()
+	turtle.fd(30)
+	turtle.pendown()	#Lower-case o
+	turtle.circle(15,360)
+	turtle.penup()
+	turtle.fd(30)
+	turtle.pendown()	#Lower-case n
+	turtle.lt(90)
+	turtle.fd(30)
+	turtle.rt(180)
+	turtle.fd(8)
+	turtle.rt(180)
+	turtle.circle(-12,180)
+	turtle.fd(23)
+	turtle.penup()
+	turtle.lt(90)
+	turtle.fd(20)
+	turtle.lt(90)
+	turtle.fd(20)
+	turtle.pendown()	#Lower-case a
+	turtle.circle(-15, 180)
+	turtle.fd(20)
+	turtle.rt(180)
+	turtle.fd(5)
+	turtle.lt(150)
+	turtle.fd(4.330127019)
+	turtle.rt(60)
+	turtle.fd(19)
+	turtle.circle(-8, 180)
+	turtle.fd(21)
+	turtle.rt(90)
+	turtle.fd(16)
+	turtle.penup()
+	turtle.lt(90)
+	turtle.fd(30)
+	turtle.lt(90)
+	turtle.fd(50)
+	turtle.pendown()	#Lower-case l
+	turtle.rt(180)
+	turtle.fd(50)
+	turtle.penup()
+	turtle.lt(90)
+	turtle.fd(40)
+	turtle.lt(90)
+	turtle.fd(50)
+	turtle.rt(180)
+	turtle.pendown()	#Lower-case d
+	turtle.fd(50)
+	turtle.rt(90)
+	turtle.fd(10)
+	turtle.circle(-12,180)
+	turtle.fd(10)
+	turtle.penup()		#END
+	turtle.fd(90)		#Turtle repositioning
+	turtle.fd(100)
+	turtle.rt(90)	
+
+turtle.onclick(name)		#Restarts when turtle is clicked again
+window.mainloop()
