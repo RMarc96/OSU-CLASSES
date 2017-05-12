@@ -1,0 +1,154 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#include<string.h>
+struct Point {
+	int X;
+	int Y;
+};
+
+int compareStructsX(const void *a, const void *b) {
+	struct Point *s1 = (struct Point *)a;
+	struct Point *s2 = (struct Point *)b;
+
+	return( s1->X - s2->X );
+}
+
+int compareStructsY(const void *a, const void *b) {
+	struct Point *s1 = (struct Point *)a;
+	struct Point *s2 = (struct Point *)b;
+
+	return( s1->Y - s2->Y );
+}
+
+int findMedian(int count, struct Point graph[]) {
+	float median;
+
+	//Since we're assuming each point has a distinct X and Y value,
+	//this function will not be used
+
+
+	if(count % 2 == 0) {
+		median = (float)(graph[count/2].X + graph[count/2 - 1].X / 2);
+	}
+	else median = graph[count/2].X;
+
+	return median;
+}
+
+
+
+
+float recFindDelta(int count, struct Point xSort[], struct Point ySort[]) {
+
+	int i = 0, j = 0, k = 0;
+	float deltaL, deltaR, deltaMin;
+
+
+	if(count <= 3) {
+		//brute force this thing
+	}
+	else {
+		struct Point leftGraph[count/2], rightGraph[count/2];
+		// We have to assume each point has distinct X,Y values	
+		// THIS MIGHT HAVE SOME ISSUES
+		for(i = 0; i < count/2; i++) {
+			leftGraph[i].X = ySort[i].X;
+			leftGraph[i].Y = ySort[i].Y;
+		
+			rightGraph[i].X = ySort[count/2+i].X;
+			rightGraph[i].Y = ySort[count/2+i].Y;
+		}
+
+		printf("FIRST REC:\n Left graph:\n");
+		for(i = 0; i < count/2; i++) {
+			printf("%d %d\n");
+		}
+		printf("\n");
+	
+		printf("Right graph:\n");
+		for(i = 0; i < count/2; i++) {
+			printf("%d %d\n", rightGraph[i].X, rightGraph[i].Y);
+		}
+		printf("\n");
+	}
+
+
+
+
+}
+
+
+float findClosestPair(int count, struct Point graph[]) {
+
+	int i = 0;
+	float minDelta;
+	struct Point xSortedGraph[count], ySortedGraph[count];
+
+	for(i = 0; i < count; i++) {
+		xSortedGraph[i].X = graph[i].X;
+		ySortedGraph[i].X = graph[i].X;
+		xSortedGraph[i].Y = graph[i].Y;
+		ySortedGraph[i].Y = graph[i].Y;
+	}	
+	qsort(xSortedGraph, count, sizeof(struct Point), compareStructsX);
+	qsort(ySortedGraph, count, sizeof(struct Point), compareStructsY);
+
+
+	minDelta = recFindDelta(count, xSortedGraph, ySortedGraph);
+
+
+	return minDelta;
+/*
+	printf("X sorted: \n");
+	for(i = 0; i < count; i++) {
+		printf("%d %d\n", xSortedGraph[i].X, xSortedGraph[i].Y);
+	}
+	printf("\n");
+
+	
+	printf("Y sorted: \n");
+	for(i = 0; i < count; i++) {
+		printf("%d %d\n", ySortedGraph[i].X, ySortedGraph[i].Y);
+	}
+	printf("\n");
+*/
+}
+
+
+
+int main(int argc, char* argv[]) {
+
+	int pairCount;
+	FILE* datapoints;
+	char buffer[256];
+	float closestPair;
+
+	if(argc < 2) {
+		printf("Error! Too few arguments\n");
+		exit(1);
+	}
+
+	if((datapoints = fopen(argv[1], "r")) == NULL) {
+		printf("Input file does not exist!\n");
+		exit(1);
+	}
+
+	while(fgets(buffer, sizeof(buffer), datapoints)) pairCount++;
+	rewind(datapoints);
+
+	struct Point graphPoints[pairCount];
+	
+	pairCount = 0;
+	while(fgets(buffer, sizeof(buffer), datapoints)) {
+		graphPoints[pairCount].X = atoi(strtok(buffer, " "));
+		graphPoints[pairCount].Y = atoi(strtok(NULL, " "));
+		pairCount++;
+	}
+	fclose(datapoints);
+	
+	
+	closestPair = findClosestPair(pairCount, graphPoints);
+
+	return 0;
+}
