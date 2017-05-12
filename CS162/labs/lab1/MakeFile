@@ -1,0 +1,2 @@
+mult_div.exe:
+	g++ lab1_dup.cpp prog.cpp -o lab1
